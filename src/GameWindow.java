@@ -9,7 +9,8 @@ public class GameWindow extends JFrame {
 
 
     public GameWindow() {
-        //setup game window
+        //setup game windowc //?
+
         this.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
