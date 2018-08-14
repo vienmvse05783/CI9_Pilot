@@ -1,6 +1,9 @@
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+
 
 public class GameWindow extends JFrame {
 
@@ -11,46 +14,29 @@ public class GameWindow extends JFrame {
     public GameWindow() {
         //setup game windowc //?
 
-        this.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-                System.out.println("windowOpened");
-            }
+        this.addWindowListener(new WindowAdapter() {
 
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
+        });
+        this.addKeyListener(new KeyAdapter() {
+
 
             @Override
-            public void windowClosed(WindowEvent e) {
-
+            public void keyPressed(KeyEvent e) {
+                gameCanvas.KeyPressed(e);
             }
 
             @Override
-            public void windowIconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-
+            public void keyReleased(KeyEvent e) {
+                gameCanvas.KeyReleased(e);
             }
         });
         this.setTitle("Micro-war by vienmv");
         this.setResizable(false);
         this.setSize(600, 800);
-
 
 
         // setup canvas
@@ -60,6 +46,18 @@ public class GameWindow extends JFrame {
         this.setVisible(true);
 
 
+    }
+    long lastTimeRender=0;
 
+    void mainLoop(){
+        while (true){
+            long currentTime=System.nanoTime();
+            if(currentTime- lastTimeRender>=17_000_000){
+                gameCanvas.run();
+                gameCanvas.render();
+                lastTimeRender=currentTime;
+            }
+
+        }
     }
 }
