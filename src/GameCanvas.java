@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameCanvas extends JPanel {
 
@@ -19,6 +20,7 @@ public class GameCanvas extends JPanel {
     Image bloodCell;
 
     ArrayList<PlayerBullet> bs;
+    ArrayList<Enemy> ene;
 
 
 
@@ -36,6 +38,7 @@ public class GameCanvas extends JPanel {
 
     public GameCanvas() {
         bs =new ArrayList<>();
+        ene =new ArrayList<>();
 
 
 
@@ -112,6 +115,9 @@ public class GameCanvas extends JPanel {
         for(PlayerBullet b:bs){
             b.y-=10;
         }
+        for (Enemy e:ene){
+            e.y+=5;
+        }
         if(xpress && !ShootLock){
             PlayerBullet newB=new PlayerBullet();
             newB.x=x;
@@ -131,10 +137,35 @@ public class GameCanvas extends JPanel {
                 count =0;
             }
         }
+        if(!EnemyLock){
+            Random random = new Random();
+            Enemy newEne=new Enemy();
+            newEne.x=random.nextInt(getWidth());
+            newEne.y=0;
+
+            try {
+                newEne.image=ImageIO.read(new File("images/enemy/bacteria/bacteria1.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ene.add(newEne);
+            EnemyLock=true;
+        }
+        if(EnemyLock){
+            countEnemy1++;
+            if(countEnemy1>80){
+                EnemyLock=false;
+                countEnemy1=0;
+            }
+        }
+
+
 
     }
     boolean ShootLock =false;
     int count;
+    int countEnemy1;
+    boolean EnemyLock=false;
 
 
 
@@ -145,6 +176,9 @@ public class GameCanvas extends JPanel {
 
         for(PlayerBullet b:bs){
             backbufferGraphics.drawImage(b.image,b.x,b.y,null);
+        }
+        for(Enemy e:ene ){
+            backbufferGraphics.drawImage(e.image,e.x,e.y, null);
         }
 
         this.repaint();

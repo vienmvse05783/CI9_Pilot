@@ -34,7 +34,7 @@ public class GameWindow extends JFrame {
                 gameCanvas.KeyReleased(e);
             }
         });
-        this.setTitle("Micro-war by vienmv");
+        this.setTitle("Micro-war ");
         this.setResizable(false);
         this.setSize(600, 800);
 
