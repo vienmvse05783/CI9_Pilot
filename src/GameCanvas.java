@@ -116,7 +116,7 @@ public class GameCanvas extends JPanel {
             b.y-=10;
         }
         for (Enemy e:ene){
-            e.y+=5;
+            e.y+=e.speed;
         }
         if(xpress && !ShootLock){
             PlayerBullet newB=new PlayerBullet();
@@ -140,7 +140,8 @@ public class GameCanvas extends JPanel {
         if(!EnemyLock){
             Random random = new Random();
             Enemy newEne=new Enemy();
-            newEne.x=random.nextInt(getWidth());
+            newEne.x=random.nextInt(getWidth()-32);
+            newEne.speed=random.nextInt(5)+3;
             newEne.y=0;
 
             try {
@@ -153,7 +154,7 @@ public class GameCanvas extends JPanel {
         }
         if(EnemyLock){
             countEnemy1++;
-            if(countEnemy1>80){
+            if(countEnemy1>60){
                 EnemyLock=false;
                 countEnemy1=0;
             }
