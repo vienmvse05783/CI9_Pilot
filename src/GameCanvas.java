@@ -14,20 +14,17 @@ public class GameCanvas extends JPanel {
     boolean leftPress = false;
     boolean upPress = false;
     boolean downPress = false;
-    boolean xpress=false;
+    boolean xpress = false;
     Image background;
     Image player;
     Image bloodCell;
 
-    ArrayList<PlayerBullet> bs;
-    ArrayList<Enemy> ene;
-
+    ArrayList<PlayerBullet> bullets;
+    ArrayList<Enemy> enemies;
 
 
     BufferedImage backbuffer;
     Graphics backbufferGraphics;
-
-
 
 
     int x = 300 - 32;
@@ -35,34 +32,28 @@ public class GameCanvas extends JPanel {
 
     String text = "Press Enter to start game";
 
+    Random random;
 
     public GameCanvas() {
-        bs =new ArrayList<>();
-        ene =new ArrayList<>();
+        random = new Random();
+        bullets = new ArrayList<>();
+        enemies = new ArrayList<>();
 
 
+        background = ImageUtil.load("images/background/background.png");
+        player = ImageUtil.load("images/player/MB-69/player1.png");
+        bloodCell = ImageUtil.load("images/blood cells/blood-cell1.png");
 
-        try {
-            background = ImageIO.read(new File("images/background/background.png"));
-            player = ImageIO.read(new File("images/player/MB-69/player1.png"));
-            bloodCell = ImageIO.read(new File("images/blood cells/blood-cell1.png"));
 
-        } catch (IOException e) {
-            System.out.println("oh no");
-            e.printStackTrace();
-        }
-
-        backbuffer=new BufferedImage(600,800,BufferedImage.TYPE_INT_ARGB);
-        backbufferGraphics=backbuffer.getGraphics();
+        backbuffer = new BufferedImage(600, 800, BufferedImage.TYPE_INT_ARGB);
+        backbufferGraphics = backbuffer.getGraphics();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-       g.drawImage(backbuffer,0,0,null);
+        g.drawImage(backbuffer, 0, 0, null);
 
     }
-
-
 
 
     void KeyPressed(KeyEvent e) {
@@ -80,8 +71,8 @@ public class GameCanvas extends JPanel {
             downPress = true;
 
         }
-        if(e.getKeyCode()==KeyEvent.VK_X){
-            xpress=true;
+        if (e.getKeyCode() == KeyEvent.VK_X) {
+            xpress = true;
         }
     }
 
@@ -98,8 +89,8 @@ public class GameCanvas extends JPanel {
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             downPress = false;
         }
-        if(e.getKeyCode()==KeyEvent.VK_X){
-            xpress=false;
+        if (e.getKeyCode() == KeyEvent.VK_X) {
+            xpress = false;
         }
     }
 
@@ -112,62 +103,59 @@ public class GameCanvas extends JPanel {
             y -= 5;
         if (downPress)
             y += 5;
-        for(PlayerBullet b:bs){
-            b.y-=10;
+        for (PlayerBullet b : bullets) {
+            b.y -= 10;
         }
-        for (Enemy e:ene){
-            e.y+=e.speed;
+        for (Enemy e : enemies) {
+            e.y += e.speed;
         }
-        if(xpress && !ShootLock){
-            PlayerBullet newB=new PlayerBullet();
-            newB.x=x;
-            newB.y=y;
-            try {
-                newB.image = ImageIO.read(new File("images/bullet/player/mb69bullet1.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            bs.add(newB);
-            ShootLock =true;
+        if (xpress && !ShootLock) {
+            PlayerBullet newB = new PlayerBullet();
+            newB.x = x;
+            newB.y = y;
+
+            newB.image = ImageUtil.load("images/bullet/player/mb69bullet1.png");
+
+            bullets.add(newB);
+            ShootLock = true;
         }
-        if(ShootLock){
+        if (ShootLock) {
             count++;
-            if(count >40){
-                ShootLock =false;
-                count =0;
+            if (count > 40) {
+                ShootLock = false;
+                count = 0;
             }
         }
-        if(!EnemyLock){
-            Random random = new Random();
-            Enemy newEne=new Enemy();
-            newEne.x=random.nextInt(getWidth()-32);
-            newEne.speed=random.nextInt(5)+3;
-            newEne.y=0;
+        if (!EnemyLock) {
+
+            Enemy newEne = new Enemy();
+            newEne.x = random.nextInt(getWidth() - 32);
+            newEne.speed = random.nextInt(4) + 2;
+            newEne.y = 0;
 
             try {
-                newEne.image=ImageIO.read(new File("images/enemy/bacteria/bacteria1.png"));
+                newEne.image = ImageIO.read(new File("images/enemy/bacteria/bacteria1.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            ene.add(newEne);
-            EnemyLock=true;
+            enemies.add(newEne);
+            EnemyLock = true;
         }
-        if(EnemyLock){
+        if (EnemyLock) {
             countEnemy1++;
-            if(countEnemy1>60){
-                EnemyLock=false;
-                countEnemy1=0;
+            if (countEnemy1 > 40) {
+                EnemyLock = false;
+                countEnemy1 = 0;
             }
         }
-
 
 
     }
-    boolean ShootLock =false;
+
+    boolean ShootLock = false;
     int count;
     int countEnemy1;
-    boolean EnemyLock=false;
-
+    boolean EnemyLock = false;
 
 
     void render() {
@@ -175,11 +163,11 @@ public class GameCanvas extends JPanel {
         backbufferGraphics.drawImage(bloodCell, 200, 384, null);
         backbufferGraphics.drawImage(player, x, y, null);
 
-        for(PlayerBullet b:bs){
-            backbufferGraphics.drawImage(b.image,b.x,b.y,null);
+        for (PlayerBullet b : bullets) {
+            backbufferGraphics.drawImage(b.image, b.x, b.y, null);
         }
-        for(Enemy e:ene ){
-            backbufferGraphics.drawImage(e.image,e.x,e.y, null);
+        for (Enemy e : enemies) {
+            backbufferGraphics.drawImage(e.image, e.x, e.y, null);
         }
 
         this.repaint();
