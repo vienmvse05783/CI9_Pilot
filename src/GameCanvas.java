@@ -110,12 +110,8 @@ public class GameCanvas extends JPanel {
             e.y += e.speed;
         }
         if (xpress && !ShootLock) {
-            PlayerBullet newB = new PlayerBullet();
-            newB.x = x;
-            newB.y = y;
-
+            PlayerBullet newB = new PlayerBullet(x, y);
             newB.image = ImageUtil.load("images/bullet/player/mb69bullet1.png");
-
             bullets.add(newB);
             ShootLock = true;
         }
@@ -127,17 +123,10 @@ public class GameCanvas extends JPanel {
             }
         }
         if (!EnemyLock) {
-
-            Enemy newEne = new Enemy();
-            newEne.x = random.nextInt(getWidth() - 32);
+            int posX = random.nextInt(getWidth() - 32);
+            Enemy newEne = new Enemy(posX, 0);
             newEne.speed = random.nextInt(4) + 2;
-            newEne.y = 0;
-
-            try {
-                newEne.image = ImageIO.read(new File("images/enemy/bacteria/bacteria1.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            newEne.image = ImageUtil.load("images/enemy/bacteria/bacteria1.png");
             enemies.add(newEne);
             EnemyLock = true;
         }
