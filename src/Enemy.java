@@ -6,10 +6,16 @@ public class Enemy {
     int speed;
     Image image;
 
-    Enemy(int posX, int posY ){
-        x=posX;
-        y=posY;
-        image=ImageUtil.load("images/enemy/bacteria/bacteria1.png");
+    Enemy(int x, int y  ){
+        this.x=x;
+        this.y=y;
+        this.image=ImageUtil.load("images/enemy/bacteria/bacteria1.png");
+    }
+    void render(Graphics g){
+        g.drawImage(this.image,this.x,this.y,null);
     }
 
+    public void run() {
+        this.y +=3;
+    }
 }

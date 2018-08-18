@@ -1,23 +1,17 @@
-import javax.imageio.ImageIO;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class GameCanvas extends JPanel {
 
-    boolean rightPress = false;
-    boolean leftPress = false;
-    boolean upPress = false;
-    boolean downPress = false;
-    boolean xpress = false;
+
     Image background;
-    Image player;
     Image bloodCell;
+    Player player = new Player();
+    InputManager inputManager;
 
     ArrayList<PlayerBullet> bullets;
     ArrayList<Enemy> enemies;
@@ -27,21 +21,20 @@ public class GameCanvas extends JPanel {
     Graphics backbufferGraphics;
 
 
-    int x = 300 - 32;
-    int y = 700 - 40;
-
     String text = "Press Enter to start game";
 
     Random random;
 
     public GameCanvas() {
+        inputManager =new InputManager();
+        player.inputManager=inputManager;
         random = new Random();
         bullets = new ArrayList<>();
         enemies = new ArrayList<>();
 
 
         background = ImageUtil.load("images/background/background.png");
-        player = ImageUtil.load("images/player/MB-69/player1.png");
+
         bloodCell = ImageUtil.load("images/blood cells/blood-cell1.png");
 
 
@@ -55,63 +48,19 @@ public class GameCanvas extends JPanel {
 
     }
 
-
-    void KeyPressed(KeyEvent e) {
-
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            rightPress = true;
-
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            leftPress = true;
-
-        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            upPress = true;
-
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            downPress = true;
-
-        }
-        if (e.getKeyCode() == KeyEvent.VK_X) {
-            xpress = true;
-        }
-    }
-
-    void KeyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            rightPress = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            leftPress = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            upPress = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            downPress = false;
-        }
-        if (e.getKeyCode() == KeyEvent.VK_X) {
-            xpress = false;
-        }
-    }
-
     void run() {
-        if (rightPress)
-            x += 5;
-        if (leftPress)
-            x -= 5;
-        if (upPress)
-            y -= 5;
-        if (downPress)
-            y += 5;
+        player.run();
+
         for (PlayerBullet b : bullets) {
-            b.y -= 10;
+            b.run();
         }
         for (Enemy e : enemies) {
-            e.y += e.speed;
+//            e.y += e.speed;
+            e.run();
         }
-        if (xpress && !ShootLock) {
-            PlayerBullet newB = new PlayerBullet(x, y);
-            newB.image = ImageUtil.load("images/bullet/player/mb69bullet1.png");
+        if (inputManager.xpressed && !ShootLock) {
+            PlayerBullet newB = new PlayerBullet(player.x, player.y);
+
             bullets.add(newB);
             ShootLock = true;
         }
@@ -150,14 +99,16 @@ public class GameCanvas extends JPanel {
     void render() {
         backbufferGraphics.drawImage(background, 0, 0, null);
         backbufferGraphics.drawImage(bloodCell, 200, 384, null);
-        backbufferGraphics.drawImage(player, x, y, null);
+
 
         for (PlayerBullet b : bullets) {
-            backbufferGraphics.drawImage(b.image, b.x, b.y, null);
+            b.render(backbufferGraphics);
         }
         for (Enemy e : enemies) {
-            backbufferGraphics.drawImage(e.image, e.x, e.y, null);
+            e.render(backbufferGraphics);
         }
+       // backbufferGraphics.drawImage(player.image, player.x, player.y, null);
+        player.render(backbufferGraphics);
 
         this.repaint();
     }
