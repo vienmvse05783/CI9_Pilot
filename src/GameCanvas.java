@@ -10,7 +10,7 @@ public class GameCanvas extends JPanel {
 
     Image background;
     Image bloodCell;
-    Player player = new Player();
+    Player player = new Player(500,600);
     InputManager inputManager;
 
     ArrayList<PlayerBullet> bullets;
@@ -50,6 +50,7 @@ public class GameCanvas extends JPanel {
 
     void run() {
         player.run();
+        player.shoot(bullets);
 
         for (PlayerBullet b : bullets) {
             b.run();
@@ -58,19 +59,8 @@ public class GameCanvas extends JPanel {
 //            e.y += e.speed;
             e.run();
         }
-        if (inputManager.xpressed && !ShootLock) {
-            PlayerBullet newB = new PlayerBullet(player.x, player.y);
 
-            bullets.add(newB);
-            ShootLock = true;
-        }
-        if (ShootLock) {
-            count++;
-            if (count > 40) {
-                ShootLock = false;
-                count = 0;
-            }
-        }
+
         if (!EnemyLock) {
             int posX = random.nextInt(getWidth() - 32);
             Enemy newEne = new Enemy(posX, 0);
@@ -90,8 +80,7 @@ public class GameCanvas extends JPanel {
 
     }
 
-    boolean ShootLock = false;
-    int count;
+
     int countEnemy1;
     boolean EnemyLock = false;
 
