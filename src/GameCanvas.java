@@ -32,6 +32,7 @@ public class GameCanvas extends JPanel {
         bullets = new ArrayList<>();
         enemies = new ArrayList<>();
 
+        player.bullets = this.bullets;
 
         background = ImageUtil.load("images/background/background.png");
 
@@ -50,7 +51,6 @@ public class GameCanvas extends JPanel {
 
     void run() {
         player.run();
-        player.shoot(bullets);
 
         for (PlayerBullet b : bullets) {
             b.run();

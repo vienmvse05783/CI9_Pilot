@@ -8,6 +8,7 @@ public class Player {
     InputManager inputManager;
     boolean shootLock = false;
     int count ;
+    ArrayList<PlayerBullet>bullets;
 
     Player(int x, int y){
         this.x = x;
@@ -21,6 +22,19 @@ public class Player {
     }
 
     void run(){
+        this.move();
+        this.shoot();
+    }
+
+    private void shoot() {
+        if(this.inputManager.xpressed && !this.shootLock){
+            PlayerBullet newBullet= new PlayerBullet(this.x,this.y);
+            this.bullets.add(newBullet);
+            this.shootLock=true;
+        }
+    }
+
+    private void move() {
         if(inputManager.rightPress){
             this.x += 5;
         }
@@ -35,27 +49,27 @@ public class Player {
         }
     }
 
-    void shoot(ArrayList<PlayerBullet> bullets){
-
-        if(inputManager.xpressed && !shootLock){
-            PlayerBullet newB = new PlayerBullet(this.x, this.y);
-            bullets.add(newB);
-            shootLock = true;
-        }
-
-        for(PlayerBullet b: bullets)
-        {
-            b.run();
-        }
-
-        if(shootLock){
-            count++;
-            if(count > 20)
-            {
-                shootLock = false;
-                count = 0;
-            }
-        }
-
-    }
+//    void shoot(ArrayList<PlayerBullet> bullets){
+//
+//        if(inputManager.xpressed && !shootLock){
+//            PlayerBullet newB = new PlayerBullet(this.x, this.y);
+//            bullets.add(newB);
+//            shootLock = true;
+//        }
+//
+//        for(PlayerBullet b: bullets)
+//        {
+//            b.run();
+//        }
+//
+//        if(shootLock){
+//            count++;
+//            if(count > 20)
+//            {
+//                shootLock = false;
+//                count = 0;
+//            }
+//        }
+//
+//    }
 }
