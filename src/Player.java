@@ -2,8 +2,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Player {
-    int x ;
-    int y ;
+    Vector2D position;
+
     Image image;
     InputManager inputManager;
     boolean shootLock = false;
@@ -11,14 +11,13 @@ public class Player {
     ArrayList<PlayerBullet>bullets;
 
     Player(int x, int y){
-        this.x = x;
-        this.y = y;
+        this.position=new Vector2D(x,y);
         this.image = ImageUtil.load("images/player/MB-69/player1.png");
     }
 
     // Method inserted
     void render(Graphics g){
-        g.drawImage(this.image, this.x, this.y, null);
+        g.drawImage(this.image, (int)this.position.x,(int)this.position.y, null);
     }
 
     void run(){
@@ -28,25 +27,27 @@ public class Player {
 
     private void shoot() {
         if(this.inputManager.xpressed && !this.shootLock){
-            PlayerBullet newBullet= new PlayerBullet(this.x,this.y);
+            PlayerBullet newBullet= new PlayerBullet((int)this.position.x,(int)this.position.y);
             this.bullets.add(newBullet);
             this.shootLock=true;
         }
     }
 
     private void move() {
+        Vector2D velocity =new Vector2D();
         if(inputManager.rightPress){
-            this.x += 5;
+            velocity.x+=5;
         }
         if(inputManager.leftPress){
-            this.x -= 5;
+           velocity.x -= 5;
         }
         if(inputManager.upPress){
-            this.y -= 5;
+            velocity.y -= 5;
         }
         if(inputManager.downPress){
-            this.y += 5;
+            velocity.y += 5;
         }
+        this.position.addUp(velocity);
     }
 
 //    void shoot(ArrayList<PlayerBullet> bullets){
