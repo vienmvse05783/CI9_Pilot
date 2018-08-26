@@ -64,7 +64,6 @@ public class GameCanvas extends JPanel {
         if (!EnemyLock) {
             int posX = random.nextInt(getWidth() - 32);
             Enemy newEne = new Enemy(posX, 0);
-            newEne.speed = random.nextInt(4) + 2;
             newEne.image = ImageUtil.load("images/enemy/bacteria/bacteria1.png");
             enemies.add(newEne);
             EnemyLock = true;
