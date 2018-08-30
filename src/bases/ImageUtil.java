@@ -1,4 +1,4 @@
-
+package Bases;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class ImageUtil {
-    static Image load(String url){
-    Image img =null;
+    public static Image load(String url){
+        Image img = null;
         try {
-           img= ImageIO.read(new File(url));
+            img = ImageIO.read(new File(url));
         } catch (IOException e) {
             e.printStackTrace();
         }
