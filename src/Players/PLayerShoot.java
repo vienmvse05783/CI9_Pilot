@@ -5,7 +5,7 @@ import Inputs.InputManager;
 
 public class PLayerShoot {
     boolean shootLock = false;//shoot
-    FrameCounter frameCounter =  new FrameCounter(20);
+    FrameCounter frameCounter =  new FrameCounter(50);
 
     void run(Player player){
         if(InputManager.instance.xPressed && !this.shootLock){

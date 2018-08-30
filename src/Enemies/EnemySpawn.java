@@ -8,7 +8,7 @@ import java.util.Random;
 public class EnemySpawn {
     Random random;
     public ArrayList<Enemy> enemies;
-    FrameCounter frameCounter = new FrameCounter(30);
+    FrameCounter frameCounter = new FrameCounter(200);
     public EnemySpawn(){
         random = new Random();
     }
