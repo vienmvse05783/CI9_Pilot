@@ -2,7 +2,7 @@ import Game.GameWindow;
 
 import java.io.IOException;
 
-public class Program
+public class Main
 {
     public static void main(String[] args) throws IOException {
         GameWindow gameWindow = new GameWindow();
