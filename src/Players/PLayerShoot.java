@@ -1,16 +1,17 @@
 package Players;
 
 import Bases.FrameCounter;
+import Bases.GameObject;
 import Inputs.InputManager;
 
 public class PLayerShoot {
-    boolean shootLock = false;//shoot
+    private boolean shootLock = false;//shoot
     FrameCounter frameCounter =  new FrameCounter(50);
 
     void run(Player player){
         if(InputManager.instance.xPressed && !this.shootLock){
             PlayerBullet newBullet = new PlayerBullet((int)player.position.x ,(int)player.position.y);
-            player.bullets.add(newBullet);
+            GameObject.add(newBullet);
             this.shootLock = true;
         }
 

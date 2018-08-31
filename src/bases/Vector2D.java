@@ -16,7 +16,7 @@ public class Vector2D {
         System.out.println(this.x + " , " + this.y);
     }
 
-    void addUp(float x, float y)
+    public void addUp(float x, float y)
     {
         this.x += x;
         this.y += y;

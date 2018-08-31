@@ -1,47 +1,37 @@
 package Enemies;
 
+import Bases.GameObject;
+import Bases.ImageRenderer;
 import Bases.ImageUtil;
 import Bases.Vector2D;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Enemy {
-    Vector2D position;
-    Image image;
-    public ArrayList<EnemyBullet>enemyBullets;
-    int time; // bullets spawned at the amount of time
+public class Enemy extends GameObject {
+    EnemyShoot enemyShoot;
+
+
+
 
     public Enemy(int x, int y){
-        enemyBullets = new ArrayList<>();
-       this.position = new Vector2D(x, y);
-       this.image = ImageUtil.load("images/enemy/bacteria/bacteria1.png");
+        super(x,y);
+       this.imageRenderer = new ImageRenderer("images/enemy/bacteria/bacteria1.png");
+       enemyShoot =new EnemyShoot();
     }
 
-    public void render(Graphics g){
-        g.drawImage(this.image, (int)position.x, (int)position.y, null);
-        for (EnemyBullet e: enemyBullets)
-            e.render(g);
+
+
+    @Override
+    public void run() {
+        super.run();
+        this.shoot();
+        this.position.addUp(0,3);
+
     }
 
-    public void shootLock(){
-        if(position.y > 780){
-            return;
-        }
-        ++time;
-        if(time > 90){
-            enemyBullets.add(new EnemyBullet((int)position.x, (int)position.y));
-            time = 0;
-        }
-    }
+    private void shoot() {
+    enemyShoot.run(this);
 
-    public void run(){
-        Vector2D velocity = new Vector2D();
-        velocity.y += 2;
-        this.position.addUp(velocity);
-        for (EnemyBullet e: enemyBullets){
-            e.run();
-        }
-        shootLock();
     }
 }

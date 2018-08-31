@@ -1,5 +1,6 @@
 package Game;
 
+import Bases.GameObject;
 import Bases.ImageUtil;
 import Enemies.Enemy;
 import Enemies.EnemySpawn;
@@ -20,8 +21,8 @@ public class GameCanvas extends JPanel {
 
     EnemySpawn enemySpawn;
     Player player;
-    ArrayList<PlayerBullet> bullets; // null
-    ArrayList<Enemy> enemies; // null
+
+
 
 
 //    int enemySpawnCount = 0;
@@ -33,12 +34,11 @@ public class GameCanvas extends JPanel {
 
         enemySpawn = new EnemySpawn();
         random = new Random();
-        bullets = new ArrayList<>();
-        enemies = new ArrayList<>();
-        enemySpawn.enemies = enemies;
+
 
         player = new Player(268, 600);
-        player.bullets = this.bullets;
+          GameObject.add(player);
+
         background = ImageUtil.load("images/background/background.png");
 
         backBuffer = new BufferedImage(600, 800, BufferedImage.TYPE_INT_ARGB);
@@ -53,13 +53,11 @@ public class GameCanvas extends JPanel {
 
 
     void run() {
-        player.run();
-
-        for(Enemy e : enemies){
-            e.run();
+        GameObject.runAll();
+        enemySpawn.run();
         }
 
-        enemySpawn.run();
+//
 //        enemySpawnCount++;
 //        if(enemySpawnCount > 60){
 //            enemySpawnCount = 0;
@@ -67,19 +65,12 @@ public class GameCanvas extends JPanel {
 //            Enemy enemy = new Enemy(posX, 0);
 //            enemies.add(enemy);
 //        }
-    }
 
 
-    void render(){
+
+    public void render(){
         backBufferGraphics.drawImage(background, 0, 0, null);
-        player.render(backBufferGraphics);
-
-        for(PlayerBullet b: bullets){
-            b.render(backBufferGraphics);
-        }
-        for(Enemy e: enemies){
-            e.render(backBufferGraphics);
-        }
+        GameObject.renderAll(backBufferGraphics);
         this.repaint();
     }
 }
