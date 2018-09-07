@@ -36,7 +36,7 @@ public class GameWindow extends JFrame
 
         this.setSize(600, 800);
         this.setResizable(false);
-        this.setTitle("Micro - War");
+        this.setTitle("Micro - War by VienMV");
 
         // Set up canvas
         gameCanvas = new GameCanvas();
