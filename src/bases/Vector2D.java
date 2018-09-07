@@ -48,7 +48,7 @@ public class Vector2D {
        return new Vector2D(this.x- other.x  ,this.x- other.y );
     }
     Vector2D subtract(int x, int y){
-        return new Vector2D(this.x- x  ,this.x- y );
+        return new Vector2D(this.x- x  ,this.y- y );
     }
 
 
