@@ -5,7 +5,7 @@ import Bases.GameObject;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BloodSpawn  {
+public class BloodSpawn {
     Random random;
     public ArrayList<Blood> bloods;
     FrameCounter frameCounter=new FrameCounter(200);

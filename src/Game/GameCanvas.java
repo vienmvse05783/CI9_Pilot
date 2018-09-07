@@ -2,9 +2,12 @@ package Game;
 
 import Bases.GameObject;
 import Bases.ImageUtil;
+import Bloods.Blood;
+import Bloods.BloodSpawn;
 import Enemies.Enemy;
 import Enemies.EnemySpawn;
 import Players.Player;
+import Players.Player2;
 import Players.PlayerBullet;
 
 import javax.swing.*;
@@ -18,9 +21,11 @@ public class GameCanvas extends JPanel {
 
 
     Image background;
-
+    BloodSpawn bloodSpawn;
     EnemySpawn enemySpawn;
     Player player;
+    Player2 player2;
+    Blood blood;
 
 
 
@@ -32,11 +37,18 @@ public class GameCanvas extends JPanel {
 
     public GameCanvas(){
 
+        bloodSpawn=new BloodSpawn();
+
         enemySpawn = new EnemySpawn();
         random = new Random();
 
+        blood =new Blood(0,0);
+        GameObject.add(blood);
 
-        player = new Player(268, 600);
+        player2=new Player2(300,300);
+        GameObject.add(player2);
+
+          player = new Player(268, 600);
           GameObject.add(player);
 
         background = ImageUtil.load("images/background/background.png");
