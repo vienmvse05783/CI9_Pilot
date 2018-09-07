@@ -25,9 +25,6 @@ public class GameObject {
             go.render(g);
         }
     }
-
-
-
     public GameObject(int x,int y){
         this.position =new Vector2D(x,y);
         this.imageRenderer=null; //not yet specified
