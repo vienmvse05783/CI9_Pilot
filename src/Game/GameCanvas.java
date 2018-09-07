@@ -27,9 +27,6 @@ public class GameCanvas extends JPanel {
     Player2 player2;
     Blood blood;
 
-
-
-
 //    int enemySpawnCount = 0;
     BufferedImage backBuffer;
     Graphics backBufferGraphics;
@@ -40,7 +37,7 @@ public class GameCanvas extends JPanel {
         bloodSpawn=new BloodSpawn();
         enemySpawn = new EnemySpawn();
         random = new Random();
-        blood =new Blood(0,0);
+        blood =new Blood(random.nextInt(600),random.nextInt(400));
         GameObject.add(blood);
         player2=new Player2(300,300);
         GameObject.add(player2);
