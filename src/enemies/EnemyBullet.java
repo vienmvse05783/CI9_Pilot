@@ -19,6 +19,6 @@ public class EnemyBullet extends GameObject {
         move();
     }
     private void move() {
-        this.position.addUp(0,5);
+        this.position.addUp(0,10);
     }
 }
