@@ -1,11 +1,9 @@
-package Enemies;
+package enemies;
 
-import Bases.GameObject;
-import Bases.ImageRenderer;
-import Bases.ImageUtil;
-import Bases.Vector2D;
+import bases.GameObject;
+import bases.ImageRenderer;
 
-import java.awt.*;
+import static bases.GameObject.checkCollision;
 
 public class EnemyBullet extends GameObject {
 
@@ -18,6 +16,9 @@ public class EnemyBullet extends GameObject {
 
     public void run(){
         super.run();
+        move();
+    }
+    private void move() {
         this.position.addUp(0,5);
     }
 }

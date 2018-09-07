@@ -1,7 +1,7 @@
-package Bloods;
+package bloods;
 
-import Bases.GameObject;
-import Bases.ImageRenderer;
+import bases.GameObject;
+import bases.ImageRenderer;
 
 public class Blood extends GameObject {
 

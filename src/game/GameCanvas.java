@@ -1,19 +1,16 @@
-package Game;
+package game;
 
-import Bases.GameObject;
-import Bases.ImageUtil;
-import Bloods.Blood;
-import Bloods.BloodSpawn;
-import Enemies.Enemy;
-import Enemies.EnemySpawn;
-import Players.Player;
-import Players.Player2;
-import Players.PlayerBullet;
+import bases.GameObject;
+import bases.ImageUtil;
+import bloods.Blood;
+import bloods.BloodSpawn;
+import enemies.EnemySpawn;
+import players.Player;
+import players.Player2;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Random;
 
 

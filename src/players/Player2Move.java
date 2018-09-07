@@ -1,4 +1,4 @@
-package Players;
+package players;
 import java.awt.*;
 public class Player2Move {
 

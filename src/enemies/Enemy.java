@@ -1,12 +1,8 @@
-package Enemies;
+package enemies;
 
-import Bases.GameObject;
-import Bases.ImageRenderer;
-import Bases.ImageUtil;
-import Bases.Vector2D;
-
-import java.awt.*;
-import java.util.ArrayList;
+import bases.BoxCollider;
+import bases.GameObject;
+import bases.ImageRenderer;
 
 public class Enemy extends GameObject {
     EnemyShoot enemyShoot;
@@ -17,6 +13,7 @@ public class Enemy extends GameObject {
     public Enemy(int x, int y){
         super(x,y);
        this.imageRenderer = new ImageRenderer("images/enemy/bacteria/bacteria1.png");
+       this.boxCollider= new BoxCollider(x,y,30,30);
        enemyShoot =new EnemyShoot();
     }
 

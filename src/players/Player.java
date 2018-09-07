@@ -1,8 +1,7 @@
-package Players;
-import java.awt.*;
+package players;
 import java.util.ArrayList;
-import Bases.GameObject;
-import Bases.ImageRenderer;
+import bases.GameObject;
+import bases.ImageRenderer;
 
 public class Player extends GameObject {
     private PlayerMove playerMove;

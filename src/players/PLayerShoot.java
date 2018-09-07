@@ -1,8 +1,8 @@
-package Players;
+package players;
 
-import Bases.FrameCounter;
-import Bases.GameObject;
-import Inputs.InputManager;
+import bases.FrameCounter;
+import bases.GameObject;
+import inputs.InputManager;
 
 public class PLayerShoot {
     private boolean shootLock = false;//shoot

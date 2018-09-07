@@ -1,6 +1,6 @@
-package Game;
+package game;
 
-import Inputs.InputManager;
+import inputs.InputManager;
 
 import javax.swing.*;
 import java.awt.event.*;

@@ -1,7 +1,7 @@
-package Players;
+package players;
 
-import Bases.GameObject;
-import Bases.ImageRenderer;
+import bases.GameObject;
+import bases.ImageRenderer;
 
 
 import java.awt.*;

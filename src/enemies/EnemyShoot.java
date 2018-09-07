@@ -1,8 +1,7 @@
-package Enemies;
+package enemies;
 
-import Bases.FrameCounter;
-import Bases.GameObject;
-import Inputs.InputManager;
+import bases.FrameCounter;
+import bases.GameObject;
 
 public class EnemyShoot {
     boolean shootLock = false;//shoot

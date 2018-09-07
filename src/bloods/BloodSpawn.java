@@ -1,7 +1,7 @@
-package Bloods;
+package bloods;
 
-import Bases.FrameCounter;
-import Bases.GameObject;
+import bases.FrameCounter;
+import bases.GameObject;
 import java.util.ArrayList;
 import java.util.Random;
 

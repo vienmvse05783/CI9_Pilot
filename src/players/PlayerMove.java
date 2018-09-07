@@ -1,7 +1,7 @@
-package Players;
+package players;
 
-import Bases.Vector2D;
-import Inputs.InputManager;
+import bases.Vector2D;
+import inputs.InputManager;
 
 
 public class PlayerMove {
