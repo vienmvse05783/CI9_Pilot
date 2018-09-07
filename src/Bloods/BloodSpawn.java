@@ -5,12 +5,13 @@ import Bases.GameObject;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BloodSpawn {
+public class BloodSpawn extends GameObject{
     Random random;
     public ArrayList<Blood> bloods;
     FrameCounter frameCounter=new FrameCounter(200);
 
     public BloodSpawn(){
+        super(0,0);
         bloods = new ArrayList<>();
         random = new Random();
     }

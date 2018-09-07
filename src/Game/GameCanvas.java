@@ -37,8 +37,8 @@ public class GameCanvas extends JPanel {
         bloodSpawn=new BloodSpawn();
         enemySpawn = new EnemySpawn();
         random = new Random();
-        blood =new Blood(random.nextInt(600),random.nextInt(400));
-        GameObject.add(blood);
+        GameObject.add(bloodSpawn);
+        GameObject.add(enemySpawn);
         player2=new Player2(300,300);
         GameObject.add(player2);
           player = new Player(268, 600);
@@ -59,8 +59,7 @@ public class GameCanvas extends JPanel {
 
     void run() {
         GameObject.runAll();
-        enemySpawn.run();
-        bloodSpawn.run();
+
         }
 
 //
