@@ -19,9 +19,11 @@ public class PlayerBullet extends GameObject {
         this.position.addUp(0,-10);
     }
     private void hitEnemies() {
-        Enemy enemy= checkCollision(this.boxCollider);
+        Enemy enemy = checkCollision(this.boxCollider);
         if(enemy !=null){
-            System.out.println("hit");
+            System.out.println("Hit");
+            enemy.getHit();
+            this.destroy();
         }
     }
 }

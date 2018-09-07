@@ -14,6 +14,7 @@ public class Enemy extends GameObject {
         super(x,y);
        this.imageRenderer = new ImageRenderer("images/enemy/bacteria/bacteria1.png");
        this.boxCollider= new BoxCollider(x,y,30,30);
+
        enemyShoot =new EnemyShoot();
     }
 
@@ -30,5 +31,8 @@ public class Enemy extends GameObject {
     private void shoot() {
     enemyShoot.run(this);
 
+    }
+    public void getHit(){
+        this.destroy();
     }
 }
