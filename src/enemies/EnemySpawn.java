@@ -9,7 +9,7 @@ import java.util.Random;
 public class EnemySpawn extends GameObject {
     Random random;
     public ArrayList<Enemy> enemies;
-    FrameCounter frameCounter = new FrameCounter(200);
+    FrameCounter frameCounter = new FrameCounter(150);
     public EnemySpawn(){
         super(0,0);
         enemies = new ArrayList<>();
