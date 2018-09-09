@@ -1,9 +1,9 @@
 package enemies;
 
+import bases.BoxCollider;
 import bases.GameObject;
 import bases.ImageRenderer;
-
-import static bases.GameObject.checkCollision;
+import players.Player;
 
 public class EnemyBullet extends GameObject {
 
@@ -11,12 +11,22 @@ public class EnemyBullet extends GameObject {
     public EnemyBullet(int x, int y){
        super(x,y);
         this.imageRenderer = new ImageRenderer("images\\bullet\\enemy\\enemy2_bullet1.png");
+        this.boxCollider= new BoxCollider(x,y,20,30);
     }
 
 
     public void run(){
         super.run();
         move();
+        hitPlayer();
+    }
+    private void hitPlayer() {
+        Player player = checkCollisionPlayer(this.boxCollider);
+        if(player !=null){
+            System.out.println("Hit Player");
+            player.getHit();
+            this.destroy();
+        }
     }
     private void move() {
         this.position.addUp(0,10);

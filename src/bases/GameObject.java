@@ -1,6 +1,7 @@
 package bases;
 
 import enemies.Enemy;
+import players.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ public class GameObject {
     public Vector2D position;
     public ImageRenderer imageRenderer;
     public  boolean isActive;
+    public  boolean isDead;
     private static ArrayList<GameObject> gameObjects=new ArrayList<>();
     private static ArrayList<GameObject> newGameObjects=new ArrayList<>();
 
@@ -17,7 +19,7 @@ public class GameObject {
     }
     public  static void runAll(){
         for(GameObject go: gameObjects){
-            if(go.isActive)
+            if(go.isActive && ! go.isDead)
             go.run();
         }
         gameObjects.addAll(newGameObjects);
@@ -26,16 +28,29 @@ public class GameObject {
 
     public  static void renderAll(Graphics g){
         for(GameObject go: gameObjects){
-            if(go.isActive)
+            if(go.isActive && !go.isDead)
             go.render(g);
         }
     }
-    public static Enemy checkCollision(BoxCollider boxCollider){
+    public static Enemy checkCollisionEnemy(BoxCollider boxCollider){
         for (GameObject go: gameObjects){
             if (go.boxCollider !=null && go.isActive){
                 if(go instanceof Enemy){
                     if(go.boxCollider.collideWith(boxCollider)){
                         return (Enemy)go;
+                    }
+                }
+            }
+        }
+        return  null;
+    }
+
+    public static Player checkCollisionPlayer(BoxCollider boxCollider){
+        for (GameObject go: gameObjects){
+            if (go.boxCollider !=null && go.isActive){
+                if(go instanceof Player){
+                    if(go.boxCollider.collideWith(boxCollider)){
+                        return (Player) go;
                     }
                 }
             }
@@ -69,5 +84,9 @@ public class GameObject {
     public void destroy(){
 
         this.isActive = false;
+    }
+    public void gameOver() {
+        this.isDead = true;
+        System.out.println("game over");
     }
 }

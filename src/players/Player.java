@@ -1,5 +1,7 @@
 package players;
 import java.util.ArrayList;
+
+import bases.BoxCollider;
 import bases.GameObject;
 import bases.ImageRenderer;
 
@@ -13,6 +15,7 @@ public class Player extends GameObject {
         this.imageRenderer=new ImageRenderer("images/player/MB-69/player1.png");
         playerMove = new PlayerMove();
         pLayerShoot = new PLayerShoot();
+        this.boxCollider= new BoxCollider(x,y,60,70);
     }
 
 
@@ -30,6 +33,9 @@ public class Player extends GameObject {
 //            b.run();
 //        }
 
+    }
+    public void getHit() {
+        this.gameOver();
     }
 
     void move(){
