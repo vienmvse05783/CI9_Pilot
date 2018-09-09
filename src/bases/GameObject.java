@@ -67,6 +67,7 @@ public class GameObject {
         }
     }
     public void destroy(){
+
         this.isActive = false;
     }
 }

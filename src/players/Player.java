@@ -33,6 +33,7 @@ public class Player extends GameObject {
     }
 
     void move(){
+
         this.playerMove.run(position);
     }
 
