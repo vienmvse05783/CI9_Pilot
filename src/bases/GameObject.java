@@ -3,6 +3,7 @@ package bases;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import enemies.Enemy;
 import players.Player;
+import players.PlayerBullet;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -33,6 +34,16 @@ public class GameObject {
             if(go.isActive && !go.isAlive)
             go.render(g);
         }
+    }
+    public static PlayerBullet recycle(){
+        for(GameObject go: gameObjects){
+            if(! go.isActive ){
+                if(go instanceof PlayerBullet){
+                    return (PlayerBullet) go;
+                }
+            }
+        }
+        return null;
     }
     //Generics
 

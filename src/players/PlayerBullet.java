@@ -16,8 +16,16 @@ public class PlayerBullet extends GameObject {
     public void run() {
         super.run();
         hitEnemies();
+        deActiveIfNeeded();
         this.position.addUp(0,-10);
     }
+
+    private void deActiveIfNeeded() {
+        if(this.position.y <0){
+            this.isActive=false;
+        }
+    }
+
     private void hitEnemies() {
         Enemy enemy = checkCollision(this.boxCollider, Enemy.class);
         if(enemy !=null){
