@@ -10,7 +10,7 @@ public class GameObject {
     public Vector2D position;
     public ImageRenderer imageRenderer;
     public  boolean isActive;
-    public  boolean isDead;
+    public  boolean isAlive;
     private static ArrayList<GameObject> gameObjects=new ArrayList<>();
     private static ArrayList<GameObject> newGameObjects=new ArrayList<>();
 
@@ -19,7 +19,7 @@ public class GameObject {
     }
     public  static void runAll(){
         for(GameObject go: gameObjects){
-            if(go.isActive && ! go.isDead)
+            if(go.isActive && ! go.isAlive)
             go.run();
         }
         gameObjects.addAll(newGameObjects);
@@ -28,7 +28,7 @@ public class GameObject {
 
     public  static void renderAll(Graphics g){
         for(GameObject go: gameObjects){
-            if(go.isActive && !go.isDead)
+            if(go.isActive && !go.isAlive)
             go.render(g);
         }
     }
@@ -86,7 +86,7 @@ public class GameObject {
         this.isActive = false;
     }
     public void gameOver() {
-        this.isDead = true;
+        this.isAlive = true;
         System.out.println("game over");
     }
 }
