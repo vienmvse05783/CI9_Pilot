@@ -10,7 +10,6 @@ public class PLayerShoot {
 
     void run(Player player) {
         if (InputManager.instance.xPressed && !this.shootLock) {
-//            Vector2D bulletPosition = player.position.subtract(0,0);
             // 1. try to recycle
             PlayerBullet newBullet = GameObject.recycle(PlayerBullet.class);
             if (newBullet == null) {

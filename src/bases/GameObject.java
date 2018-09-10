@@ -39,7 +39,7 @@ public class GameObject {
         for(GameObject go: gameObjects){
             if(! go.isActive ){
                 if(go.getClass().equals(cls)){
-                    return (T) go;
+                   return  (T) go;
                 }
             }
         }
