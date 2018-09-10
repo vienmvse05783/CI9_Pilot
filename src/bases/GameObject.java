@@ -35,11 +35,11 @@ public class GameObject {
             go.render(g);
         }
     }
-    public static PlayerBullet recycle(){
+    public static<T extends GameObject> T  recycle(Class<T>cls){
         for(GameObject go: gameObjects){
             if(! go.isActive ){
-                if(go instanceof PlayerBullet){
-                    return (PlayerBullet) go;
+                if(go.getClass().equals(cls)){
+                    return (T) go;
                 }
             }
         }
