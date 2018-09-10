@@ -8,7 +8,7 @@ public class Blood extends GameObject {
 
     public Blood(int x, int y) {
         super(x, y);
-        this.imageRenderer = new ImageRenderer("images/blood cells/blood-cell1.png");
+        this.renderer = new ImageRenderer("images/blood cells/blood-cell1.png");
 
     }
 

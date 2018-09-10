@@ -1,16 +1,12 @@
 package bases;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import enemies.Enemy;
-import players.Player;
-import players.PlayerBullet;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class GameObject {
     public Vector2D position;
-    public ImageRenderer imageRenderer;
+    public Renderer renderer;
     public  boolean isActive;
     public  boolean isAlive;
     private static ArrayList<GameObject> gameObjects=new ArrayList<>();
@@ -65,7 +61,7 @@ public class GameObject {
     public BoxCollider boxCollider;
     public GameObject(int x,int y){
         this.position =new Vector2D(x,y);
-        this.imageRenderer=null; //not yet specified
+        this.renderer=null; //not yet specified
         this.boxCollider = null;
         this.isActive=true;
     }
@@ -79,8 +75,8 @@ public class GameObject {
 
     }
     public void render(Graphics g){
-        if(this.imageRenderer!=null){
-            this.imageRenderer.render(g,this.position);
+        if(this.renderer!=null){
+            this.renderer.render(g,this.position);
         }
         if(this.boxCollider !=null){
             this.boxCollider.render(g);

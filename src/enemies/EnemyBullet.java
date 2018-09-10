@@ -10,7 +10,7 @@ public class EnemyBullet extends GameObject {
 
     public EnemyBullet(int x, int y){
        super(x,y);
-        this.imageRenderer = new ImageRenderer("images\\bullet\\enemy\\enemy2_bullet1.png");
+        this.renderer = new ImageRenderer("images\\bullet\\enemy\\enemy2_bullet1.png");
         this.boxCollider= new BoxCollider(x,y,20,30);
     }
 

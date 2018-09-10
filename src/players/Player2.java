@@ -11,7 +11,7 @@ public class Player2 extends GameObject {
 
     public Player2(int x, int y) {
         super(x, y);
-        imageRenderer = new ImageRenderer("images/player/MB-70/player1.png");
+        renderer = new ImageRenderer("images/player/MB-70/player1.png");
         player2Move = new Player2Move();
     }
 

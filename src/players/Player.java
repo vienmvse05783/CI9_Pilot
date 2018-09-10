@@ -12,7 +12,7 @@ public class Player extends GameObject {
 
     public Player(int x,int y){
         super(x,y);
-        this.imageRenderer=new ImageRenderer("images/player/MB-69/player1.png");
+        this.renderer=new ImageRenderer("images/player/MB-69/player1.png");
         playerMove = new PlayerMove();
         pLayerShoot = new PLayerShoot();
         this.boxCollider= new BoxCollider(x,y,60,70);
