@@ -21,7 +21,7 @@ public class EnemyBullet extends GameObject {
         hitPlayer();
     }
     private void hitPlayer() {
-        Player player = checkCollisionPlayer(this.boxCollider);
+        Player player = checkCollision(this.boxCollider,Player.class);
         if(player !=null){
             System.out.println("Hit Player");
             player.getHit();

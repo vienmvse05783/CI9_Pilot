@@ -1,5 +1,6 @@
 package bases;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import enemies.Enemy;
 import players.Player;
 
@@ -24,6 +25,7 @@ public class GameObject {
         }
         gameObjects.addAll(newGameObjects);
         newGameObjects.clear();
+        System.out.println(gameObjects.size());
     }
 
     public  static void renderAll(Graphics g){
@@ -32,12 +34,15 @@ public class GameObject {
             go.render(g);
         }
     }
-    public static Enemy checkCollisionEnemy(BoxCollider boxCollider){
+    //Generics
+
+
+    public static <T extends GameObject> T checkCollision(BoxCollider boxCollider, Class<T> cls){
         for (GameObject go: gameObjects){
             if (go.boxCollider !=null && go.isActive){
-                if(go instanceof Enemy){
+                if(go.getClass().equals(cls) ){
                     if(go.boxCollider.collideWith(boxCollider)){
-                        return (Enemy)go;
+                        return (T)go;
                     }
                 }
             }
@@ -45,18 +50,7 @@ public class GameObject {
         return  null;
     }
 
-    public static Player checkCollisionPlayer(BoxCollider boxCollider){
-        for (GameObject go: gameObjects){
-            if (go.boxCollider !=null && go.isActive){
-                if(go instanceof Player){
-                    if(go.boxCollider.collideWith(boxCollider)){
-                        return (Player) go;
-                    }
-                }
-            }
-        }
-        return  null;
-    }
+
     public BoxCollider boxCollider;
     public GameObject(int x,int y){
         this.position =new Vector2D(x,y);
