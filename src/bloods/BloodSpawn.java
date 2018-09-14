@@ -19,8 +19,16 @@ public class BloodSpawn extends GameObject{
         frameCounter.run();
         if (frameCounter.expired){
             int posX = random.nextInt(600);
-            Blood blood = new Blood(posX, 0);
-            GameObject.add(blood);
+            Blood blood = GameObject.recycle(Blood.class);
+            if(blood==null){
+                blood=new Blood(posX, 0);
+                GameObject.add(blood);
+            }else {
+                blood.isActive=true;
+                blood.position.x=posX;
+                blood.position.y=0;
+            }
+
             frameCounter.reset();
         }
     }

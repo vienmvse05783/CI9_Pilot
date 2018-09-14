@@ -20,8 +20,17 @@ public class EnemySpawn extends GameObject {
         frameCounter.run();
         if (frameCounter.expired){
             int posX = random.nextInt(600);
-            Enemy enemy = new Enemy(posX, 0);
-            GameObject.add(enemy);
+            Enemy enemy=GameObject.recycle(Enemy.class);
+            if(enemy==null){
+                enemy = new Enemy(posX, 0);
+                GameObject.add(enemy);
+            }else {
+                enemy.isActive=true;
+                enemy.position.x=posX;
+                enemy.position.y=0;
+
+            }
+
             frameCounter.reset();
         }
     }

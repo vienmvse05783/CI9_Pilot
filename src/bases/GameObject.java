@@ -89,5 +89,6 @@ public class GameObject {
     public void gameOver() {
         this.isAlive = true;
         System.out.println("game over");
+
     }
 }

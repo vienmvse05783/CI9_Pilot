@@ -28,9 +28,13 @@ public class Enemy extends GameObject {
         super.run();
         this.shoot();
         this.position.addUp(0, 3);
-
+        deActiveIfNeeded();
     }
-
+    private void deActiveIfNeeded() {
+        if(this.position.y >800){
+            this.isActive=false;
+        }
+    }
     private void shoot() {
         enemyShoot.run(this);
 
