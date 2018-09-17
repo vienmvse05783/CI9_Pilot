@@ -9,16 +9,16 @@ public class EnemyShoot {
 
     void run(Enemy enemy) {
         if ( !this.shootLock) {
-            EnemyBullet newBullet= GameObject.recycle(EnemyBullet.class);
-            if(newBullet==null){
-                newBullet = new EnemyBullet((int) enemy.position.x, (int) enemy.position.y);
-                GameObject.add(newBullet);
-            }else {
-                newBullet.isActive=true;
-                newBullet.position.x=enemy.position.x;
-                newBullet.position.y=enemy.position.y;
-
-            }
+            EnemyBullet newBullet= GameObject.recycle((int) enemy.position.x, (int) enemy.position.y,EnemyBullet.class);
+//            if(newBullet==null){
+//                newBullet = new EnemyBullet((int) enemy.position.x, (int) enemy.position.y);
+//                GameObject.add(newBullet);
+//            }else {
+//                newBullet.isActive=true;
+//                newBullet.position.x=enemy.position.x;
+//                newBullet.position.y=enemy.position.y;
+//
+//            }
 
             this.shootLock = true;
         }

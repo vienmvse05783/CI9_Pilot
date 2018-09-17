@@ -2,6 +2,7 @@ package bases;
 
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class GameObject {
@@ -31,15 +32,30 @@ public class GameObject {
             go.render(g);
         }
     }
-    public static<T extends GameObject> T  recycle(Class<T>cls){
+    public static<T extends GameObject> T  recycle(int x, int y, Class<T>cls){
+       T pb=null;
         for(GameObject go: gameObjects){
+
             if(! go.isActive ){
                 if(go.getClass().equals(cls)){
-                   return  (T) go;
+                   pb=   (T) go;
                 }
             }
+            if(pb==null){
+                try {
+                    pb = cls.getConstructor(int.class,int.class).newInstance(x,y);
+                } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+                GameObject.add(pb);
+            }else {
+                pb.isActive=true;
+                pb.position.x=x;
+               pb.position.y=y;
+
+            }
         }
-        return null;
+        return pb;
     }
     //Generics
 
@@ -59,12 +75,19 @@ public class GameObject {
 
 
     public BoxCollider boxCollider;
-    public GameObject(int x,int y){
+
+
+    public GameObject(int x, int y){
         this.position =new Vector2D(x,y);
         this.renderer=null; //not yet specified
         this.boxCollider = null;
         this.isActive=true;
     }
+    public GameObject(){
+        this(0,0);
+    }
+
+
     public void run(){
         if(this.boxCollider !=null){
             this.boxCollider.position.x=this.position.x;

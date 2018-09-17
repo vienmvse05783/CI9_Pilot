@@ -6,6 +6,9 @@ import enemies.Enemy;
 import java.awt.*;
 
 public class PlayerBullet extends GameObject {
+    public PlayerBullet(){
+        this(0,0);
+    }
     public PlayerBullet(int x, int y){
       super(x,y);
       this.renderer=new Animation(
